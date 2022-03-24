@@ -160,29 +160,39 @@ class CmsController extends Controller
             $t = time();
             if($file) {
                 $path = Yii::getAlias("@webroot") . "/img/article_thumbs/";
-                $path2 = Yii::getAlias("@webroot")."/../../howaboutagoodday.com/web/img/article_thumbs/";
+                $path2 = Yii::getAlias("@webroot"). "/../../howaboutagoodday.com/web/img/article_thumbs/";
+                $path3 = Yii::getAlias("@webroot"). "/../../newsartic.com/web/img/article_thumbs/";
                 if (!is_dir($path)) {
                     mkdir($path, 0777, true);
                 }
                 if (!is_dir($path2)) {
                     mkdir($path2, 0777, true);
                 }
+                if (!is_dir($path2)) {
+                    mkdir($path3, 0777, true);
+                }
                 $file->saveAs($path.$t."$file->name",false);
                 $file->saveAs($path2.$t."$file->name",false);
+                $file->saveAs($path3.$t."$file->name",false);
                 $model->thumbnail = "/img/article_thumbs/$t"."$file->name";
             }
             $files = UploadedFile::getInstances($model, 'imageFiles');
             foreach ($files as $f) {
                 $path = Yii::getAlias("@webroot") . "/img/uploads/$model->id/";
                 $path2 = Yii::getAlias("@webroot")."/../../howaboutagoodday.com/web/img/uploads/$model->id/";
+                $path2 = Yii::getAlias("@webroot")."/../../newsartic.com/web/img/uploads/$model->id/";
                 if (!is_dir($path)) {
                     mkdir($path, 0777, true);
                 }
                 if (!is_dir($path2)) {
                     mkdir($path2, 0777, true);
                 }
+                if (!is_dir($path2)) {
+                    mkdir($path3, 0777, true);
+                }
                 $f->saveAs($path."$f->name",false);
                 $f->saveAs($path2."$f->name",false);
+                $f->saveAs($path3."$f->name",false);
                 $model->has_files = true;
             }
             if($model->has_files) $content->content = $this->process_img(Yii::$app->request->post()["Article"]["actual_content"], $model->id);

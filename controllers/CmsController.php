@@ -180,14 +180,14 @@ class CmsController extends Controller
             foreach ($files as $f) {
                 $path = Yii::getAlias("@webroot") . "/img/uploads/$model->id/";
                 $path2 = Yii::getAlias("@webroot")."/../../howaboutagoodday.com/web/img/uploads/$model->id/";
-                $path2 = Yii::getAlias("@webroot")."/../../newsartic.com/web/img/uploads/$model->id/";
+                $path3 = Yii::getAlias("@webroot")."/../../newsartic.com/web/img/uploads/$model->id/";
                 if (!is_dir($path)) {
                     mkdir($path, 0777, true);
                 }
                 if (!is_dir($path2)) {
                     mkdir($path2, 0777, true);
                 }
-                if (!is_dir($path2)) {
+                if (!is_dir($path3)) {
                     mkdir($path3, 0777, true);
                 }
                 $f->saveAs($path."$f->name",false);

@@ -159,40 +159,20 @@ class CmsController extends Controller
             $file = UploadedFile::getInstance($model, 'file_input');
             $t = time();
             if($file) {
-                $path = Yii::getAlias("@webroot") . "/img/article_thumbs/";
-                $path2 = Yii::getAlias("@webroot"). "/../../howaboutagoodday.com/web/img/article_thumbs/";
-                $path3 = Yii::getAlias("@webroot"). "/../../newsartic.com/web/img/article_thumbs/";
+                $path = Yii::getAlias("@webroot") . "/../../img/article_thumbs/";
                 if (!is_dir($path)) {
-                    mkdir($path, 0777, true);
-                }
-                if (!is_dir($path2)) {
-                    mkdir($path2, 0777, true);
-                }
-                if (!is_dir($path2)) {
-                    mkdir($path3, 0777, true);
+                    mkdir($path, 0666, true);
                 }
                 $file->saveAs($path.$t."$file->name",false);
-                $file->saveAs($path2.$t."$file->name",false);
-                $file->saveAs($path3.$t."$file->name",false);
-                $model->thumbnail = "/img/article_thumbs/$t"."$file->name";
+                $model->thumbnail = "/storage/img/article_thumbs/$t"."$file->name";
             }
             $files = UploadedFile::getInstances($model, 'imageFiles');
             foreach ($files as $f) {
-                $path = Yii::getAlias("@webroot") . "/img/uploads/$model->id/";
-                $path2 = Yii::getAlias("@webroot")."/../../howaboutagoodday.com/web/img/uploads/$model->id/";
-                $path3 = Yii::getAlias("@webroot")."/../../newsartic.com/web/img/uploads/$model->id/";
+                $path = Yii::getAlias("@webroot") . "/../../storage/img/uploads/$model->id/";
                 if (!is_dir($path)) {
-                    mkdir($path, 0777, true);
-                }
-                if (!is_dir($path2)) {
-                    mkdir($path2, 0777, true);
-                }
-                if (!is_dir($path3)) {
-                    mkdir($path3, 0777, true);
+                    mkdir($path, 0666, true);
                 }
                 $f->saveAs($path."$f->name",false);
-                $f->saveAs($path2."$f->name",false);
-                $f->saveAs($path3."$f->name",false);
                 $model->has_files = true;
             }
             if($model->has_files) $content->content = $this->process_img(Yii::$app->request->post()["Article"]["actual_content"], $model->id);
@@ -228,7 +208,7 @@ class CmsController extends Controller
             $matches[3] = preg_replace('/(width|height)=[\'\"].*?[\'\"]/i', '', $matches[3]);
             $src = [];
             preg_match('/([\w\-\+\=\$\#\%\&\?\^\(\)\:\;\<\>\!\~\`\@\d]*?\.\w+)/i',$matches[2],$src);
-            return $matches[1]."'/img/uploads/$id/$src[1]'".$matches[3];
+            return $matches[1]."'/storage/img/uploads/$id/$src[1]'".$matches[3];
         },$html);
     }
 }

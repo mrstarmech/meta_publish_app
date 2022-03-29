@@ -161,7 +161,7 @@ class CmsController extends Controller
             if($file) {
                 $path = Yii::getAlias("@webroot") . "/../../storage/img/article_thumbs/";
                 if (!is_dir($path)) {
-                    mkdir($path, 0666, true);
+                    mkdir($path, 0777, true);
                 }
                 $file->saveAs($path.$t."$file->name",false);
                 $model->thumbnail = "/storage/img/article_thumbs/$t"."$file->name";
@@ -170,7 +170,7 @@ class CmsController extends Controller
             foreach ($files as $f) {
                 $path = Yii::getAlias("@webroot") . "/../../storage/img/uploads/$model->id/";
                 if (!is_dir($path)) {
-                    mkdir($path, 0666, true);
+                    mkdir($path, 0777, true);
                 }
                 $f->saveAs($path."$f->name",false);
                 $model->has_files = true;

@@ -123,12 +123,12 @@ class CmsController extends Controller
             $file = UploadedFile::getInstance($model, 'thumbnail');
             $t = time();
             if($file) {
-                $path = Yii::getAlias("@webroot") . "/img/article_thumbs/";
+                $path = Yii::getAlias("@webroot") . "/../../storage/img/article_thumbs/";
                 if (!is_dir($path)) {
                     mkdir($path, 0777, true);
                 }
                 $file->saveAs($path.$t."$file->name",false);
-                $model->thumbnail = "/img/article_thumbs/$t"."$file->name";
+                $model->thumbnail = "/storage/img/article_thumbs/$t"."$file->name";
             }
 
             $content->content = Yii::$app->request->post()["Article"]["actual_content"];

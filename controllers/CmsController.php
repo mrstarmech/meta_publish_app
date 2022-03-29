@@ -204,11 +204,11 @@ class CmsController extends Controller
     private function process_img($html, $id) {
         
         return preg_replace_callback('/(<img.+src=)([\",\'].+?[\",\'])(.*?>)/i',function($matches)use($id){
-            $matches[1] = preg_replace('/(width|height)=[\'\"].*?[\'\"]/i', '', $matches[1]);
-            $matches[3] = preg_replace('/(width|height)=[\'\"].*?[\'\"]/i', '', $matches[3]);
+            $matches[1] = preg_replace('/(width|height|style)=[\'\"].*?[\'\"]/i', '', $matches[1]);
+            $matches[3] = preg_replace('/(width|height|style)=[\'\"].*?[\'\"]/i', '', $matches[3]);
             $src = [];
             preg_match('/([\w\-\+\=\$\#\%\&\?\^\(\)\:\;\<\>\!\~\`\@\d]*?\.\w+)/i',$matches[2],$src);
-            return $matches[1]."'/storage/img/uploads/$id/$src[1]'".$matches[3];
+            return "<img src='/storage/img/uploads/$id/$src[1]'>";
         },$html);
     }
 }

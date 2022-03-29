@@ -159,7 +159,7 @@ class CmsController extends Controller
             $file = UploadedFile::getInstance($model, 'file_input');
             $t = time();
             if($file) {
-                $path = Yii::getAlias("@webroot") . "/../../img/article_thumbs/";
+                $path = Yii::getAlias("@webroot") . "/../../storage/img/article_thumbs/";
                 if (!is_dir($path)) {
                     mkdir($path, 0666, true);
                 }

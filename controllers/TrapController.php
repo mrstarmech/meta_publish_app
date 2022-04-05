@@ -81,7 +81,7 @@ class TrapController extends \yii\rest\Controller
             $mail = new UserMail();
             $mail->name = $this->getParam('name', $data);
             $mail->email = $this->getParam('email', $data);
-            $mail->time = time();
+            $mail->time = 0;
             if(!$mail->save()){
                 return $mail->errors;
             }

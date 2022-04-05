@@ -19,7 +19,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode('MetaPublishAdmin') ?></title>
+    <title><?= Html::encode('Mail Log') ?></title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <?php $this->head() ?>
 </head>
@@ -29,8 +29,8 @@ AppAsset::register($this);
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => 'MetaPublish',
-        'brandUrl' => '@web/cms/index',
+        'brandLabel' => 'MailList',
+        'brandUrl' => '@web/cms/mail',
         'options' => [
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
@@ -42,9 +42,7 @@ AppAsset::register($this);
         ];
     } else {
         $navItems = [
-            ['label' => 'Article List', 'url' => ['/cms/index']],
-            ['label' => 'Create Article', 'url' => ['/cms/create']],
-            ['label' => 'Mail List', 'url' => ['/cms/mail']],
+            ['label' => 'Artiles', 'url' => ['/cms']],
             (
             '<li>'
             . Html::beginForm(['/cms/logout'], 'post', ['class' => 'form-inline'])
@@ -71,8 +69,8 @@ echo Nav::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
     </div>
+    <?= $content ?>
 </main>
 
 <footer class="footer mt-auto py-3 text-muted">

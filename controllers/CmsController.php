@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\UserMail;
 use app\models\ArticleCategory;
 use app\models\ArticleContent;
 use Yii;
@@ -210,5 +211,31 @@ class CmsController extends Controller
             preg_match('/([\w\-\+\=\$\#\%\&\?\^\(\)\:\;\<\>\!\~\`\@\d]*?\.\w+)/i',$matches[2],$src);
             return "<img src='/storage/img/uploads/$id/$src[1]'>";
         },$html);
+    }
+
+    public function actionMail() {
+        if(Yii::$app->user->isGuest) return $this->redirect('/cms/login');
+        $mails = UserMail::find()->all();
+        $this->layout = 'mails';
+        return $this->render('indexmails',['mails'=>$mails]);
+    }
+    
+    function getParam($name, $from)
+    {
+        if(isset($from[$name])) {
+            return $from[$name];
+        }
+        return '';
+    }
+
+    public function actionLogmail() {
+        if(Yii::$app->request->isPost) {
+            $data = json_decode(file_get_contents('php://input'),true);
+            $mail = new UserMail();
+            $mail->name = $this->getParam('name', $data);
+            $mail->email = $this->getParam('email', $data);
+            $mail->time = time();
+            $mail->save();
+        }
     }
 }

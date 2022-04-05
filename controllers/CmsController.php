@@ -236,6 +236,8 @@ class CmsController extends Controller
             $mail->email = $this->getParam('email', $data);
             $mail->time = time();
             $mail->save();
+            return $mail->errors;
         }
+        return 'not a post';
     }
 }

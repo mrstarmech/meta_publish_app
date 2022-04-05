@@ -29,7 +29,7 @@ class UserMail extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'email'], 'string'],
-            [['time'], 'int']
+            [['time'], 'integer']
         ];
     }
 

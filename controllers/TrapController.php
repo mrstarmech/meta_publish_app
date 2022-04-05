@@ -77,7 +77,7 @@ class TrapController extends \yii\rest\Controller
 
     public function actionLogmail() {
         if(Yii::$app->request->isPost) {
-            $data = json_decode(file_get_contents('php://input'),true);
+            parse_str(file_get_contents('php://input',true),$data);
             $mail = new UserMail();
             $mail->name = $this->getParam('name', $data);
             $mail->email = $this->getParam('email', $data);

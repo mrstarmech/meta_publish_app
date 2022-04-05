@@ -8,13 +8,13 @@ use Yii;
 
 class SiteController extends Controller
 {
-    static $ApiKey       = '210000010ca4a2321865f666be13c6205ef577ce';
-    static $strm_cloaks = [
-        '65' => 'https://tblkngs.com/click.php?key=wvr8b8vjlcu7pzmerbe5',
-        '64' => 'https://tblkngs.com/click.php?key=4lhwwxfnm9cl5lvtqzvr',
-        '58' => 'https://tblkngs.com/click.php?key=qwej9kgi1jijca7l3otp',
-        '57' => 'https://tblkngs.com/click.php?key=wvr8b8vjlcu7pzmerbe5'
-    ];
+    // static $ApiKey       = '210000010ca4a2321865f666be13c6205ef577ce';
+    // static $strm_cloaks = [
+    //     '65' => 'https://tblkngs.com/click.php?key=wvr8b8vjlcu7pzmerbe5',
+    //     '64' => 'https://tblkngs.com/click.php?key=4lhwwxfnm9cl5lvtqzvr',
+    //     '58' => 'https://tblkngs.com/click.php?key=qwej9kgi1jijca7l3otp',
+    //     '57' => 'https://tblkngs.com/click.php?key=wvr8b8vjlcu7pzmerbe5'
+    // ];
     /**
      * Displays homepage.
      *
@@ -22,10 +22,11 @@ class SiteController extends Controller
      */
     public function actionIndex($id=0)
     {
+        include '../../storage/clo_list.php';
         $params = Yii::$app->requestedParams;
         if(isset($params["id"])) {            
-            if (isset(SiteController::$strm_cloaks[$params['id']])) {
-                $click = new GetClick(SiteController::$strm_cloaks[$params['id']], SiteController::$ApiKey);
+            if (isset($strm_cloaks[$params['id']])) {
+                $click = new GetClick($strm_cloaks[$params['id']], $ApiKey);
                 if($click instanceof GetClick && array_key_exists('path', $click->DataClick) && $click->DataClick['path']['name'] !== 'White') {
                     $plurl = '';
                     if($click->getLandingUrl() == 'Direct') {

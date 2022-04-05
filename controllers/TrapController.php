@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Browserdetail;
+use app\models\UserMail;
 use app\models\Click;
 use app\models\IpLocation;
 use Yii;
@@ -72,6 +73,19 @@ class TrapController extends \yii\rest\Controller
             }
         }
         return false;
+    }
+
+    public function actionLogmail() {
+        if(Yii::$app->request->isPost) {
+            $data = json_decode(file_get_contents('php://input'),true);
+            $mail = new UserMail();
+            $mail->name = $this->getParam('name', $data);
+            $mail->email = $this->getParam('email', $data);
+            $mail->time = time();
+            $mail->save();
+            return $mail->errors;
+        }
+        return 'not a post';
     }
 
 }

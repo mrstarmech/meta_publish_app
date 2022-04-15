@@ -8,13 +8,6 @@ use Yii;
 
 class SiteController extends Controller
 {
-    // static $ApiKey       = '210000010ca4a2321865f666be13c6205ef577ce';
-    // static $strm_cloaks = [
-    //     '65' => 'https://tblkngs.com/click.php?key=wvr8b8vjlcu7pzmerbe5',
-    //     '64' => 'https://tblkngs.com/click.php?key=4lhwwxfnm9cl5lvtqzvr',
-    //     '58' => 'https://tblkngs.com/click.php?key=qwej9kgi1jijca7l3otp',
-    //     '57' => 'https://tblkngs.com/click.php?key=wvr8b8vjlcu7pzmerbe5'
-    // ];
     /**
      * Displays homepage.
      *
@@ -35,7 +28,7 @@ class SiteController extends Controller
                         $plurl = parse_url($click->getLandingUrl());
                     }
                     $path = "/../../storage".$plurl["path"];
-                    $query = $plurl["query"];
+                    $query = $plurl["query"].$click->DataClick["campaign"]["campaign_land_tokens"];
                     if($query) {
                         parse_str($query, $query_params);
                     }

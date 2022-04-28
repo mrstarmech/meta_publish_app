@@ -19,7 +19,7 @@ class SiteController extends Controller
         $params = Yii::$app->requestedParams;
         if(isset($params["id"])) {            
             if (isset($strm_cloaks[$params['id']])) {
-                $click = new GetClick($strm_cloaks[$params['id']], $ApiKey);
+                $click = new GetClick($strm_cloaks[$params['id']], "1610000018a540a7e2143802f5d5d4ecca962b663");
                 if($click instanceof GetClick && array_key_exists('path', $click->DataClick) && $click->DataClick['path']['name'] !== 'White') {
                     $plurl = '';
                     if($click->getLandingUrl() == 'Direct') {
@@ -33,7 +33,7 @@ class SiteController extends Controller
                         parse_str($query, $query_params);
                     }
                     $this->layout = false;
-                    return $this->render('indexpl',['root_fld'=>$path, 'path_to_pl'=>Yii::getAlias('@webroot').$path."index.php", 'query_params'=>$query_params]);
+                    return $this->render('indexpl',['root_fld'=>$path, 'path_to_pl'=>Yii::getAlias('@webroot').$path."index.php", 'query_params'=>$query_params, 'debug'=>$click->DataClick]);
                 }
             }
         }

@@ -40,6 +40,6 @@ VueAsset::register($this);
 
     <?php $this->endBody() ?>
 </body>
-<link rel="stylesheet" href="css/block.css">
+<link rel="stylesheet" href="/css/block.css">
 </html>
 <?php $this->endPage() ?>

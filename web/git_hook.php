@@ -1,6 +1,5 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/../../config.php";
-const TOKEN = "5382692469:AAE3qWvlFbKpLrhbt0M4u1GOILoyXJB2_fE";
 const BASE_URL = "https://api.telegram.org/bot" . TOKEN . "/";
 const CHAT_ID = "343005487";
 

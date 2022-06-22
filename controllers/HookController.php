@@ -13,7 +13,9 @@ class HookController extends Controller
 
     public function actionTb() {
         $rq_params = Yii::$app->request->queryParams;
-        if (isset($rq_params['tbl_click_id']) && isset($rq_params['tbl_event_name'])) {
+        $accid = isset($rq_params['accid']) ? $rq_params['accid'] : 0;
+        $is_appr = isset($rq_params['cnv_status']) && $rq_params['cnv_status'] == 'appr';
+        if (isset($rq_params['tbl_click_id']) && isset($rq_params['tbl_event_name']) && $accid && $is_appr) {
             $content = json_encode([
                 "actions" => [
                     [
@@ -24,7 +26,7 @@ class HookController extends Controller
                 ]
             ]);
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://trc.taboola.com/1388223/log/3/bulk-s2s-action');
+            curl_setopt($ch, CURLOPT_URL, "https://trc.taboola.com/$accid/log/3/bulk-s2s-action");
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $content);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-type: application/json", "Content-length: " . strlen($content)));
